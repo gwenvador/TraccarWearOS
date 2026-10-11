@@ -17,8 +17,21 @@ android {
         versionName = "1.0"
     }
 
+    // Release signing is optional: it only applies when the key properties are provided
+    // (e.g. in ~/.gradle/gradle.properties), so anyone can still build the debug APK.
+    val storeFile = providers.gradleProperty("TRACCAR_STORE_FILE").orNull
+    if (storeFile != null) {
+        signingConfigs.create("release") {
+            this.storeFile = file(storeFile)
+            storePassword = providers.gradleProperty("TRACCAR_STORE_PASSWORD").get()
+            keyAlias = providers.gradleProperty("TRACCAR_KEY_ALIAS").get()
+            keyPassword = providers.gradleProperty("TRACCAR_KEY_PASSWORD").get()
+        }
+    }
+
     buildTypes {
         release {
+            signingConfigs.findByName("release")?.let { signingConfig = it }
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

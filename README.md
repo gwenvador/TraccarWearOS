@@ -20,6 +20,21 @@ the background tracking, offline queue and upload retries.
 - Ongoing Activity icon on the watch face while tracking runs; the app closes after Start so the
   screen can turn off.
 
+## Install
+
+Download `TraccarWearOS-1.0.apk` from the
+[latest release](https://github.com/gwenvador/TraccarWearOS/releases/latest), then install it on
+the watch with wireless debugging (Settings > Developer options > Wireless debugging):
+
+```sh
+adb pair <ip>:<pairing-port>        # once, with the pairing code shown on the watch
+adb connect <ip>:<port>
+adb install TraccarWearOS-1.0.apk
+```
+
+Requires Wear OS 3 or later (API 30+). On first Start the watch asks for location, activity and
+notification permissions; location must be set to "Allow all the time" for background tracking.
+
 ## Build
 
 Requirements: Android Studio (or JDK 17+ and the Android SDK) with **platform 37**, since the
