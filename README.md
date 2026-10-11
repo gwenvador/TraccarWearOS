@@ -32,7 +32,7 @@ adb connect <ip>:<port>
 adb install TraccarWearOS-1.0.apk
 ```
 
-Requires Wear OS 3 or later (API 30+). On first Start the watch asks for location, activity and
+Requires Wear OS 3 or later (API 30+). Tested on a Samsung Galaxy Watch Ultra. On first Start the watch asks for location, activity and
 notification permissions; location must be set to "Allow all the time" for background tracking.
 
 ## Build
