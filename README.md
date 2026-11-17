@@ -19,18 +19,25 @@ the background tracking, offline queue and upload retries.
   the app settings when "Allow all the time" is needed.
 - Ongoing Activity icon on the watch face while tracking runs; the app closes after Start so the
   screen can turn off.
+- Connection status: the icon is green when positions reach the server and red when they don't
+  (no network, or a queued position waiting for more than 60 s). Also shown in the app.
+  Some watch faces tint the icon in white; the notification text still says "Connected" or
+  "Not connected".
 
 ## Install
 
-Download `TraccarWearOS-1.0.apk` from the
+Download `TraccarWearOS-1.1.apk` from the
 [latest release](https://github.com/gwenvador/TraccarWearOS/releases/latest), then install it on
 the watch with wireless debugging (Settings > Developer options > Wireless debugging):
 
 ```sh
 adb pair <ip>:<pairing-port>        # once, with the pairing code shown on the watch
 adb connect <ip>:<port>
-adb install TraccarWearOS-1.0.apk
+adb install TraccarWearOS-1.1.apk
 ```
+
+Release APKs are signed with a different key than a locally built debug APK: if you installed a
+debug build, uninstall it before installing a release.
 
 Requires Wear OS 3 or later (API 30+). Tested on a Samsung Galaxy Watch Ultra. On first Start the watch asks for location, activity and
 notification permissions; location must be set to "Allow all the time" for background tracking.

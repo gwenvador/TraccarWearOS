@@ -23,6 +23,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.foundation.text.KeyboardOptions
@@ -115,6 +116,7 @@ private fun TrackerScreen(initialTracker: Tracker, activity: MainActivity) {
     var error by remember { mutableStateOf<String?>(null) }
 
     val state by tracker.state.collectAsState()
+    val connected by (activity.application as TraccarWearOSApp).connected.collectAsState()
     val config = tracker.config
     // An empty or zero value is ignored until it becomes valid.
     val newLocation = amount.toIntOrNull()?.takeIf { it > 0 }?.let { n ->
@@ -170,6 +172,15 @@ private fun TrackerScreen(initialTracker: Tracker, activity: MainActivity) {
                     },
                     style = MaterialTheme.typography.titleMedium,
                 )
+            }
+            if (state.enabled) {
+                item {
+                    Text(
+                        if (connected) "● Connected" else "● Not connected",
+                        color = if (connected) Color(0xFF4CAF50) else Color(0xFFF44336),
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
             }
             state.lastAcceptedLocation?.let { p ->
                 item {
